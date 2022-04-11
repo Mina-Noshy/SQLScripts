@@ -3,7 +3,7 @@
 /*
 	You can write the next code in "takeBackup.bat" file to execute this procedure
 
-	sqlcmd -S "EPMS-ERP\SQLEXPRESS" -U "sa" -P "000000" -d "ePMSBackup" -Q "EXEC TakeEpmsBackups"
+	sqlcmd -S "(localdb)\MSSQLLocalDB" -U "sa" -P "000000" -d "DB_Backup" -Q "EXEC TakeEpmsBackups"
 */
 
 
@@ -18,10 +18,10 @@
 USE MASTER
 GO
 
-CREATE DATABASE ePMSBackup
+CREATE DATABASE DB_Backup
 GO
 
-USE ePMSBackup
+USE DB_Backup
 GO
 
 
@@ -29,7 +29,7 @@ CREATE PROCEDURE [dbo].[TakeEpmsBackups]
 
 AS   
 
-DECLARE @PATH NVARCHAR(300) = 'F:\Eng Mina Noshy\Daily_Backups\' + CAST(CONVERT(DATE, GETDATE()) AS NVARCHAR(300)) + '\'
+DECLARE @PATH NVARCHAR(300) = 'D:\Daily_Backups\' + CAST(CONVERT(DATE, GETDATE()) AS NVARCHAR(300)) + '\'
 EXEC master.dbo.xp_create_subdir @PATH
 
 
@@ -45,15 +45,17 @@ DECLARE @NEW_PATH NVARCHAR(300);
 
 WHILE EXISTS (SELECT 1 FROM @Tbl_Names)
 BEGIN
+
      SELECT TOP 1 @db_name =  name FROM @Tbl_Names;
 
 	 SET @NEW_PATH = @PATH + @db_name + '.bak';
 
-	 BACKUP DATABASE ePMS3001 TO DISK = @NEW_PATH;
+	 BACKUP DATABASE @db_name TO DISK = @NEW_PATH;
 
      DELETE FROM @Tbl_Names WHERE name = @db_name;
-END
 
-SELECT (name + ' ==> Created Backup Successfully') FROM master.sys.databases ;
+	 PRINT (@db_name + ' ==> Created Backup To Path <' + @NEW_PATH + '> Successfully.')
+
+END
 
 GO
