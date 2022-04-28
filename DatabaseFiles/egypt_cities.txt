@@ -1,0 +1,33 @@
+create database EgyptDB collate Arabic_CI_AI;
+use EgyptDB;
+create table Cities(ID int primary key, ArName nvarchar(30), EnName nvarchar(30));
+insert into Cities values
+(1, 'القاهره', 'Cairo'),
+(2, 'الجيزه', 'Giza'),
+(3, 'المنيا','Minya'),
+(4, 'السويس','Suez'),
+(5, 'الاقصر','Luxor'),
+(6, 'الاسكندريه', 'Alexandria'),
+(7, 'بورسعيد', 'Port Said'),
+(8, 'دمياط', 'Damietta'),
+(9, 'اسوان', 'Aswan'),
+(10, 'القليوبيه', 'Qalyubia'),
+(11, 'بني سويف', 'Beni Suef'),
+(12, 'الاسماعيليه', 'Ismailia'),
+(13, 'سوهاج', 'Sohag'),
+(14, 'اسيوط', 'Asyut'),
+(15, 'البحر الاحمر', 'Red Sea'),
+(16, 'البحيره', 'Beheira'),
+(17, 'الدقهليه', 'Dakahlia'),
+(18, 'الغربيه', 'Gharbia'),
+(19, 'الفيوم', 'Faiyum'),
+(20, 'قنا', 'Qena'),
+(21, 'كفر الشيخ', 'Kafr El Sheikh'),
+(22, 'مطروح', 'Matruh'),
+(23, 'المنوفيه', 'Monufia'),
+(24, 'الوادي الجديد', 'New Valley'),
+(25, 'السادس من اكتوبر', '6th of October'),
+(26, 'شمال سيناء', 'North Sinai'),
+(27,'جنوب سيناء', 'South Sinai'),
+(28, 'حلوان', 'Helwan'),
+(29, 'الشرقيه', 'Sharqia');
